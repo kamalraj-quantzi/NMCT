@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: 'Source Sans 3', sans-serif; color: #1F2933; background: #FFFFFF; }
+  h1, h2, h3 { font-family: 'Archivo', sans-serif; }
+  a { color: #1B5CA8; text-decoration: none; }
+  a:hover { color: #0E9C8E; }
+</style>
+</helmet>
+
+<sc-if value="{{ showUtilityBar }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Utility bar" style="background: #1F2933; color: #C9D2DC; font-size: 13px; display: flex; justify-content: space-between; align-items: center; padding: 8px 48px; gap: 24px;">
+  <div style="display: flex; gap: 24px;">
+    <span>+91 422 2401747</span>
+    <span>info@nmctngo.org</span>
+  </div>
+  <div style="display: flex; gap: 24px;">
+    <a href="#" style="color: #C9D2DC; font-weight: 600;">Annual Report 2024–25</a>
+    <a href="#contact" style="color: #C9D2DC;">Contact</a>
+  </div>
+</div>
+</sc-if>
+
+<header data-screen-label="Header" style="background: #FFFFFF; border-bottom: 1px solid #E2E8F0; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 84px; position: relative; z-index: 50;">
+  <a href="#" style="display: flex; align-items: center; gap: 12px;">
+    <img src="https://nmctngo.org/image/logo/logo.png" alt="NMCT — Native Medicare Charitable Trust" style="height: 56px; width: auto; display: block;">
+  </a>
+  <nav style="display: flex; align-items: center; gap: 4px;">
+    <sc-for list="{{ menus }}" as="menu" hint-placeholder-count="5">
+      <div style="position: relative;" onMouseEnter="{{ menu.enter }}" onMouseLeave="{{ menu.leave }}">
+        <a href="#" style="display: flex; align-items: center; gap: 6px; padding: 12px 16px; font-size: 15px; font-weight: 600; color: #1F2933; border-radius: 6px;" style-hover="color: #1B5CA8; background: #F5F7FA;">
+          {{ menu.label }}
+          <span style="font-size: 9px; color: #8494A7;">▼</span>
+        </a>
+        <sc-if value="{{ menu.open }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; top: 100%; left: 0; min-width: 260px; background: #FFFFFF; border-radius: 0 0 10px 10px; border-top: 3px solid #0E9C8E; box-shadow: 0 16px 40px rgba(31,41,51,0.16); padding: 10px 0;">
+            <sc-for list="{{ menu.items }}" as="item" hint-placeholder-count="4">
+              <a href="#" style="display: block; padding: 10px 20px; font-size: 14.5px; font-weight: 500; color: #1F2933;" style-hover="background: #F5F7FA; color: #1B5CA8;">{{ item }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </nav>
+  <a href="{{ donateUrl }}" style="background: #FFC20E; color: #1F2933; font-weight: 700; font-size: 15px; padding: 13px 28px; border-radius: 8px; letter-spacing: 0.01em;" style-hover="background: #E8AF00;">Donate</a>
+</header>
+
+<section data-screen-label="Hero slider" style="position: relative; height: 620px; background: #123B63; overflow: hidden;">
+  <sc-for list="{{ slides }}" as="slide" hint-placeholder-count="3">
+    <div style="position: absolute; inset: 0; opacity: {{ slide.opacity }}; transition: opacity 0.9s ease; pointer-events: {{ slide.pe }};">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ slide.id }}" src="{{ slide.img }}" shape="rect" placeholder="{{ slide.photoHint }}" style="position: absolute; inset: 0;" hint-size="100%,620px"></x-import>
+      <div style="position: absolute; inset: 0; background: linear-gradient(92deg, rgba(14,32,56,0.92) 0%, rgba(14,32,56,0.62) 44%, rgba(14,32,56,0.08) 78%); pointer-events: none;"></div>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; padding: 0 48px; pointer-events: none;">
+        <div style="max-width: 640px; margin-left: 24px;">
+          <div style="display: inline-block; background: rgba(14,156,142,0.18); border: 1px solid rgba(14,156,142,0.6); color: #7EE0D6; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 7px 14px; border-radius: 100px; margin-bottom: 24px; font-family: 'Archivo', sans-serif;">{{ slide.tag }}</div>
+          <h1 style="font-size: 56px; line-height: 1.06; font-weight: 800; color: #FFFFFF; margin: 0 0 20px; letter-spacing: -0.02em; text-wrap: pretty;">{{ slide.title }}</h1>
+          <p style="font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.88); margin: 0 0 32px; max-width: 540px; text-wrap: pretty;">{{ slide.sub }}</p>
+          <div style="display: flex; gap: 14px; pointer-events: auto;">
+            <a href="{{ donateUrl }}" style="background: #FFC20E; color: #1F2933; font-weight: 700; font-size: 16px; padding: 15px 30px; border-radius: 8px;" style-hover="background: #E8AF00;">Donate now</a>
+            <a href="#programmes" style="border: 1.5px solid rgba(255,255,255,0.55); color: #FFFFFF; font-weight: 600; font-size: 16px; padding: 15px 30px; border-radius: 8px;" style-hover="background: rgba(255,255,255,0.12); color: #FFFFFF;">Explore our work</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-for>
+  <div style="position: absolute; bottom: 30px; left: 72px; display: flex; gap: 10px; z-index: 5;">
+    <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="3">
+      <button onClick="{{ dot.pick }}" aria-label="{{ dot.label }}" style="width: {{ dot.width }}; height: 8px; border-radius: 100px; border: none; cursor: pointer; padding: 0; background: {{ dot.bg }}; transition: all 0.3s ease;"></button>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Impact counters" style="background: #1B5CA8; color: #FFFFFF; padding: 56px 48px 44px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+      <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="4">
+        <div style="border-left: 3px solid #0E9C8E; padding-left: 20px;">
+          <div style="font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1;">{{ stat.value }}</div>
+          <div style="font-size: 15px; color: rgba(255,255,255,0.82); margin-top: 10px; line-height: 1.4;">{{ stat.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size: 12.5px; color: rgba(255,255,255,0.55); margin-top: 28px;">* Bracketed figures are placeholders — replaced with verified numbers supplied by NMCT before launch.</div>
+  </div>
+</section>
+
+<section id="programmes" data-screen-label="What We Do" style="background: #F5F7FA; padding: 88px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="color: #0E9C8E; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 12px;">WHAT WE DO</div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 44px;">
+      <h2 style="font-size: 38px; font-weight: 800; margin: 0; letter-spacing: -0.02em; max-width: 560px;">Seven programme areas, one goal: communities that thrive.</h2>
+      <a href="#" style="font-weight: 700; font-size: 15px; white-space: nowrap;">All programmes →</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <sc-for list="{{ programmes }}" as="prog" hint-placeholder-count="8">
+        <a href="#" style="display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; border-radius: 12px; padding: 26px 24px; border: 1px solid #E2E8F0; color: #1F2933;" style-hover="border-color: #1B5CA8; box-shadow: 0 8px 24px rgba(27,92,168,0.10); color: #1F2933;">
+          <div style="font-size: 13px; font-weight: 700; color: #0E9C8E; letter-spacing: 0.08em;">{{ prog.num }}</div>
+          <div style="font-size: 19px; font-weight: 700;">{{ prog.title }}</div>
+          <div style="font-size: 14px; line-height: 1.55; color: #52606D;">{{ prog.desc }}</div>
+        </a>
+      </sc-for>
+      <a href="#" style="display: flex; flex-direction: column; justify-content: center; gap: 8px; background: #1B5CA8; border-radius: 12px; padding: 26px 24px; color: #FFFFFF;" style-hover="background: #164C8C; color: #FFFFFF;">
+        <div style="font-size: 19px; font-weight: 700;">See all programmes</div>
+        <div style="font-size: 14px; color: rgba(255,255,255,0.8);">Including live projects with Ford, Bosch, NABARD and more →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Featured projects" style="background: #FFFFFF; padding: 88px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="color: #0E9C8E; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 12px; font-family: 'Archivo', sans-serif;">FEATURED PROJECTS</div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 40px;">
+      <h2 style="font-size: 36px; font-weight: 800; margin: 0; letter-spacing: -0.02em; max-width: 560px;">Live in the field, funded by partners.</h2>
+      <a href="#" style="font-weight: 700; font-size: 15px; white-space: nowrap;">All projects →</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <sc-for list="{{ projects }}" as="proj" hint-placeholder-count="3">
+        <a href="#" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; color: #1F2933;" style-hover="border-color: #1B5CA8; box-shadow: 0 10px 28px rgba(27,92,168,0.10); color: #1F2933;">
+          <div style="position: relative; height: 200px;">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ proj.slotId }}" src="{{ proj.img }}" shape="rect" placeholder="{{ proj.photoHint }}" style="position: absolute; inset: 0;" hint-size="100%,200px"></x-import>
+          </div>
+          <div style="padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="align-self: flex-start; background: rgba(14,156,142,0.10); color: #0B7A70; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; padding: 5px 10px; border-radius: 6px; font-family: 'Archivo', sans-serif;">{{ proj.funder }}</div>
+            <div style="font-size: 19px; font-weight: 700; line-height: 1.3; font-family: 'Archivo', sans-serif;">{{ proj.title }}</div>
+            <div style="font-size: 14.5px; line-height: 1.55; color: #52606D;">{{ proj.desc }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="story" data-screen-label="Impact story" style="background: #F5F7FA; padding: 96px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center;">
+    <div style="position: relative; height: 440px;">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="story-photo" src="https://www.nmctngo.org/image/department-item/department-item-3.jpg" shape="rounded" radius="16" placeholder="Field story photo — Wadi orchards, Nilgiris" style="position: absolute; inset: 0;" hint-size="100%,440px"></x-import>
+      <div style="position: absolute; bottom: 24px; right: -20px; background: #0E9C8E; color: #FFFFFF; border-radius: 10px; padding: 16px 22px; font-size: 14px; font-weight: 600; box-shadow: 0 12px 28px rgba(14,156,142,0.35); pointer-events: none;">NABARD Wadi programme · Nilgiris</div>
+    </div>
+    <div>
+      <div style="color: #0E9C8E; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 18px;">IMPACT STORY</div>
+      <blockquote style="font-family: 'Archivo', sans-serif; font-size: 30px; line-height: 1.32; font-weight: 700; margin: 0 0 24px; color: #1F2933; letter-spacing: -0.01em; text-wrap: pretty;">“The orchard changed what our children believe is possible.”</blockquote>
+      <p style="font-size: 16px; line-height: 1.65; color: #52606D; margin: 0 0 12px;">Through the integrated tribal livelihood programme, families in the Nilgiris and Karamadai are turning small plots into productive Wadi orchards — steady income rooted in their own land.</p>
+      <p style="font-size: 14px; color: #8494A7; margin: 0 0 28px;">— Participant name & village (content to be supplied by NMCT)</p>
+      <a href="#" style="font-weight: 700; font-size: 15px;">Read more impact stories →</a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Donation widget" style="background: #123B63; padding: 88px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 460px; gap: 72px; align-items: center;">
+    <div>
+      <h2 style="font-size: 40px; font-weight: 800; color: #FFFFFF; margin: 0 0 18px; letter-spacing: -0.02em; text-wrap: pretty;">Your gift goes straight to the field.</h2>
+      <p style="font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.82); margin: 0 0 24px; max-width: 480px;">Donations fund health camps, education kits, livelihood training and community programmes across Tamil Nadu. NMCT is registered under the Indian Trust Act, 1988.</p>
+      <div style="display: flex; gap: 28px; color: rgba(255,255,255,0.7); font-size: 14px;">
+        <span>✓ 80G tax exemption</span>
+        <span>✓ Secure PayU checkout</span>
+        <span>✓ Transparent reporting</span>
+      </div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 16px; padding: 32px; box-shadow: 0 24px 60px rgba(0,0,0,0.28);">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; background: #F5F7FA; border-radius: 8px; padding: 4px; margin-bottom: 20px;">
+        <button onClick="{{ pickOnce }}" style="border: none; cursor: pointer; font-family: 'Archivo', sans-serif; font-size: 15px; font-weight: 700; padding: 11px 0; border-radius: 6px; background: {{ onceBg }}; color: {{ onceColor }};">Give once</button>
+        <button onClick="{{ pickMonthly }}" style="border: none; cursor: pointer; font-family: 'Archivo', sans-serif; font-size: 15px; font-weight: 700; padding: 11px 0; border-radius: 6px; background: {{ monthlyBg }}; color: {{ monthlyColor }};">Monthly</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;">
+        <sc-for list="{{ amounts }}" as="amt" hint-placeholder-count="4">
+          <button onClick="{{ amt.pick }}" style="cursor: pointer; font-family: 'Archivo', sans-serif; font-size: 15px; font-weight: 700; padding: 13px 0; border-radius: 8px; border: 1.5px solid {{ amt.border }}; background: {{ amt.bg }}; color: {{ amt.color }};">{{ amt.label }}</button>
+        </sc-for>
+      </div>
+      <input placeholder="Other amount (₹)" style="width: 100%; box-sizing: border-box; font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding: 13px 14px; border-radius: 8px; border: 1.5px solid #E2E8F0; margin-bottom: 14px; outline: none;">
+      <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+        <span style="flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; color: #52606D; border: 1px solid #E2E8F0; border-radius: 6px; padding: 7px 0; letter-spacing: 0.04em;">UPI</span>
+        <span style="flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; color: #52606D; border: 1px solid #E2E8F0; border-radius: 6px; padding: 7px 0; letter-spacing: 0.04em;">NETBANKING</span>
+        <span style="flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; color: #52606D; border: 1px solid #E2E8F0; border-radius: 6px; padding: 7px 0; letter-spacing: 0.04em;">CARDS</span>
+      </div>
+      <a href="{{ donateUrl }}" style="display: block; text-align: center; background: #FFC20E; color: #1F2933; font-weight: 800; font-size: 17px; padding: 16px 0; border-radius: 8px;" style-hover="background: #E8AF00;">Donate {{ selectedLabel }}</a>
+      <div style="text-align: center; font-size: 12.5px; color: #8494A7; margin-top: 14px;">You will be taken to NMCT's secure donation page.</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Partners" style="background: #FFFFFF; padding: 64px 48px; border-bottom: 1px solid #E2E8F0;">
+  <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #8494A7; margin-bottom: 28px;">TRUSTED BY CSR &amp; INSTITUTIONAL PARTNERS</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 40px;">
+      <sc-for list="{{ partners }}" as="p" hint-placeholder-count="8">
+        <span style="font-size: 20px; font-weight: 700; color: #A8B4C0; letter-spacing: 0.02em;">{{ p }}</span>
+      </sc-for>
+    </div>
+    <div style="font-size: 12.5px; color: #C0CAD4; margin-top: 24px;">Partner logos to replace wordmarks — files to be supplied by NMCT.</div>
+  </div>
+</section>
+
+<section data-screen-label="News and reports" style="background: #F5F7FA; padding: 88px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 22px 28px; margin-bottom: 48px;">
+      <div style="display: flex; align-items: center; gap: 18px;">
+        <div style="background: #0E9C8E; color: #FFFFFF; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 6px;">NEW</div>
+        <div style="font-size: 17px; font-weight: 700;">The NMCT Annual Report 2024–25 is now available.</div>
+      </div>
+      <a href="#" style="font-weight: 700; font-size: 15px; white-space: nowrap;">Download the report →</a>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 36px;">
+      <h2 style="font-size: 34px; font-weight: 800; margin: 0; letter-spacing: -0.02em;">News &amp; media</h2>
+      <a href="#" style="font-weight: 700; font-size: 15px; white-space: nowrap;">All news &amp; events →</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+        <a href="#" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; color: #1F2933;" style-hover="box-shadow: 0 10px 28px rgba(31,41,51,0.10); color: #1F2933;">
+          <div style="position: relative; height: 190px;">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ n.slotId }}" src="{{ n.img }}" shape="rect" placeholder="{{ n.photoHint }}" style="position: absolute; inset: 0;" hint-size="100%,190px"></x-import>
+          </div>
+          <div style="padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-size: 13px; font-weight: 600; color: #0E9C8E;">{{ n.date }}</div>
+            <div style="font-size: 18px; font-weight: 700; line-height: 1.35; text-wrap: pretty;">{{ n.title }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Get involved CTA" style="background: #FFFFFF; padding: 88px 48px;">
+  <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 38px; font-weight: 800; margin: 0 0 14px; letter-spacing: -0.02em;">More ways to stand with us</h2>
+    <p style="font-size: 17px; color: #52606D; margin: 0 auto 44px; max-width: 560px;">Partner as a CSR team or funder, volunteer in the field, or bring your students and institution on board.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left;">
+      <sc-for list="{{ involve }}" as="v" hint-placeholder-count="3">
+        <a href="#" style="display: flex; flex-direction: column; gap: 10px; border: 1px solid #E2E8F0; border-radius: 12px; padding: 28px 26px; color: #1F2933;" style-hover="border-color: #0E9C8E; color: #1F2933;">
+          <div style="font-size: 20px; font-weight: 700;">{{ v.title }}</div>
+          <div style="font-size: 14.5px; line-height: 1.55; color: #52606D;">{{ v.desc }}</div>
+          <div style="font-weight: 700; font-size: 14px; color: #1B5CA8; margin-top: 6px;">{{ v.cta }} →</div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" data-screen-label="Footer" style="background: #1F2933; color: #B9C4CF; padding: 72px 48px 36px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 40px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+      <div>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px 16px; display: inline-block; margin-bottom: 20px;">
+          <img src="https://nmctngo.org/image/logo/logo.png" alt="NMCT" style="height: 44px; width: auto; display: block;">
+        </div>
+        <p style="font-size: 14px; line-height: 1.65; margin: 0 0 16px; max-width: 260px;">Native Medicare Charitable Trust — registered under the Indian Trust Act, serving Tamil Nadu since 1988.</p>
+        <p style="font-size: 13.5px; line-height: 1.65; margin: 0 0 14px; color: #8494A7;">Somaiyampalayam, Coimbatore,<br>Tamil Nadu, India<br>+91 422 2401747 · info@nmctngo.org</p>
+        <p style="font-size: 12.5px; line-height: 1.7; margin: 0; color: #8494A7;">12A: [registration no.] · 80G: [registration no.]<br>FCRA: [registration no.]</p>
+      </div>
+      <sc-for list="{{ menus }}" as="menu" hint-placeholder-count="5">
+        <div>
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #FFFFFF; margin-bottom: 16px; text-transform: uppercase;">{{ menu.label }}</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ menu.items }}" as="item" hint-placeholder-count="4">
+              <a href="#" style="font-size: 13.5px; color: #B9C4CF;" style-hover="color: #FFFFFF;">{{ item }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 28px; font-size: 13px; color: #8494A7;">
+      <span>© 2026 Native Medicare Charitable Trust. All rights reserved.</span>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: #8494A7;" style-hover="color: #FFFFFF;">Facebook</a>
+        <a href="#" style="color: #8494A7;" style-hover="color: #FFFFFF;">Instagram</a>
+        <a href="#" style="color: #8494A7;" style-hover="color: #FFFFFF;">LinkedIn</a>
+        <a href="#" style="color: #8494A7;" style-hover="color: #FFFFFF;">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;donateUrl&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;/donate.html&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Launch blockers&quot; },
+  &quot;showUtilityBar&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Header&quot; }
+}">
+class Component extends DCLogic {
+  state = { openMenu: null, freq: 'once', amount: 1000, slide: 0 };
+
+  componentDidMount() {
+    this._timer = setInterval(() => this.setState(s => ({ slide: (s.slide + 1) % 3 })), 6000);
+  }
+  componentWillUnmount() { clearInterval(this._timer); }
+
+  // Single navigation source: header dropdowns AND footer columns render from this one definition.
+  static NAV = [
+    { label: 'Who We Are', items: ['About NMCT', 'Leadership', 'Recognitions & Credibility', 'Partners'] },
+    { label: 'What We Do', items: ['Health', 'Education', 'Livelihood', 'Empowerment', 'Environment', 'Peace & Public Cooperation', 'Safe Workplaces'] },
+    { label: 'Our Impact', items: ['Impact & Success Stories', 'Annual Reports', 'Key Numbers'] },
+    { label: 'Get Involved', items: ['Partner With Us', 'Volunteer', 'Students & Institutions'] },
+    { label: 'News & Media', items: ['News & Events', 'Publications', 'Media & Gallery'] },
+  ];
+
+  renderVals() {
+    const s = this.state;
+    const menus = Component.NAV.map((m, i) => ({
+      ...m,
+      open: s.openMenu === i,
+      enter: () => this.setState({ openMenu: i }),
+      leave: () => this.setState({ openMenu: null }),
+    }));
+    const amounts = [500, 1000, 2500, 5000].map(v => {
+      const sel = s.amount === v;
+      return {
+        label: '₹' + v.toLocaleString('en-IN'),
+        pick: () => this.setState({ amount: v }),
+        bg: sel ? '#1B5CA8' : '#FFFFFF',
+        color: sel ? '#FFFFFF' : '#1F2933',
+        border: sel ? '#1B5CA8' : '#E2E8F0',
+      };
+    });
+    const once = s.freq === 'once';
+    const slideData = [
+      { id: 'hero-health', tag: 'HEALTH', title: 'Care that reaches the last hamlet.', sub: 'Mobile health camps, ambulance services and primary health centre upgrades with Ford, Bosch and TANSACS.', photoHint: 'Healthcare camp field photo', img: 'https://www.nmctngo.org/image/department-item/department-item-2.jpg' },
+      { id: 'hero-livelihood', tag: 'LIVELIHOOD', title: 'Land, skills and a steady income.', sub: 'Wadi orchards, coastal livelihoods and technical academies for tribal and rural families.', photoHint: 'Tribal livelihood / Wadi orchard photo', img: 'https://www.nmctngo.org/image/department-item/department-item-3.jpg' },
+      { id: 'hero-education', tag: 'EDUCATION', title: 'Every child in a classroom.', sub: 'Education kits, fee support and learning drives for Tamil Nadu\u2019s most vulnerable children.', photoHint: 'Education / classroom field photo', img: 'https://www.nmctngo.org/image/department-item/department-item-1.jpg' },
+    ];
+    const slides = slideData.map((sl, i) => ({
+      ...sl,
+      opacity: s.slide === i ? 1 : 0,
+      pe: s.slide === i ? 'auto' : 'none',
+    }));
+    const dots = slideData.map((sl, i) => ({
+      label: 'Go to slide ' + (i + 1),
+      pick: () => this.setState({ slide: i }),
+      bg: s.slide === i ? '#FFC20E' : 'rgba(255,255,255,0.45)',
+      width: s.slide === i ? '28px' : '8px',
+    }));
+    return {
+      menus,
+      amounts,
+      slides,
+      dots,
+      donateUrl: this.props.donateUrl ?? '/donate.html',
+      showUtilityBar: this.props.showUtilityBar ?? true,
+      pickOnce: () => this.setState({ freq: 'once' }),
+      pickMonthly: () => this.setState({ freq: 'monthly' }),
+      onceBg: once ? '#1B5CA8' : 'transparent',
+      onceColor: once ? '#FFFFFF' : '#52606D',
+      monthlyBg: once ? 'transparent' : '#1B5CA8',
+      monthlyColor: once ? '#52606D' : '#FFFFFF',
+      selectedLabel: '₹' + s.amount.toLocaleString('en-IN') + (once ? '' : ' / month'),
+      stats: [
+        { value: '38', label: 'Years of grassroots service since 1988' },
+        { value: '7', label: 'Programme areas across Tamil Nadu' },
+        { value: '[XX,XXX]+', label: 'Lives reached across districts *' },
+        { value: '[XX]+', label: 'CSR & institutional partners *' },
+      ],
+      projects: [
+        { slotId: 'proj-ford', funder: 'FORD', title: 'Sanjeevi Health Care & Services', desc: 'Expanding the reach of mobile healthcare across rural Coimbatore.', photoHint: 'Health camp photo', img: 'https://www.nmctngo.org/image/department-item/department-item-2.jpg' },
+        { slotId: 'proj-nabard', funder: 'NABARD', title: 'Integrated Tribal Livelihood Program', desc: 'Wadi horticulture for tribal families in the Nilgiris and Karamadai.', photoHint: 'Wadi orchard photo', img: 'https://www.nmctngo.org/image/department-item/department-item-3.jpg' },
+        { slotId: 'proj-bosch', funder: 'BOSCH', title: 'Aarogya Phase 2', desc: 'NQAS certification for primary health centres.', photoHint: 'Primary health centre photo', img: 'https://www.nmctngo.org/image/department-item/department-item-4.jpg' },
+      ],
+      programmes: [
+        { num: '01', title: 'Health', desc: 'Health camps, HIV/AIDS care and primary health centre upgrades with Ford, Bosch and TANSACS.' },
+        { num: '02', title: 'Education', desc: 'Learning support, education kits and school fee drives for vulnerable children.' },
+        { num: '03', title: 'Livelihood', desc: 'Wadi horticulture, coastal livelihoods and technical skills academies.' },
+        { num: '04', title: 'Empowerment', desc: 'Women\u2019s self-help groups, tribal rights and community-based organisations.' },
+        { num: '05', title: 'Environment', desc: 'Green initiatives and sustainability rooted in local stewardship.' },
+        { num: '06', title: 'Peace & Public Cooperation', desc: 'Community celebrations that bring districts together \u2014 Pongal Vizha, Daan Utsav and more.' },
+        { num: '07', title: 'Safe Workplaces', desc: 'Prevention of sexual harassment \u2014 training, policy and compliance for institutions.' },
+      ],
+      partners: ['FORD', 'BOSCH', 'NABARD', 'TANSACS', 'VISTEON', 'ROYAL ENFIELD', 'KVB', 'NTT DATA', 'IndiGoReach', 'Y4D'],
+      news: [
+        { slotId: 'news-1', photoHint: 'Report launch photo', date: 'June 2026', title: 'NMCT Annual Report 2024\u201325 released', img: 'https://www.nmctngo.org/image/department-item/department-item-1.jpg' },
+        { slotId: 'news-2', photoHint: 'PHC / health camp photo', date: 'May 2026', title: 'Bosch Aarogya Phase 2: NQAS certification for primary health centres', img: 'https://www.nmctngo.org/image/department-item/department-item-4.jpg' },
+        { slotId: 'news-3', photoHint: 'Rojakootam drive photo', date: 'April 2026', title: 'Rojakootam: annual education kit & fees distribution drive', img: 'https://www.nmctngo.org/image/section/img-section-fun-fact-h4.jpg' },
+      ],
+      involve: [
+        { title: 'Partner with us', desc: 'CSR programmes, institutional funding and NGO collaborations \u2014 structured for measurable outcomes.', cta: 'Explore partnerships' },
+        { title: 'Volunteer', desc: 'Join field programmes in person or contribute remotely to rural initiatives.', cta: 'Sign up' },
+        { title: 'Students & institutions', desc: 'MSW internships, academic MoUs and field placement pipelines.', cta: 'See programmes' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
