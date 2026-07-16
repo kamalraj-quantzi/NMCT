@@ -1,0 +1,47 @@
+name: Deploy demo.quantzi.in
+
+# Publishes deploy/demo.quantzi.in/ to the GoDaddy subdomain over FTP.
+#
+# Runs when:
+#   • the demo bundle changes on the default branch (main), or
+#   • you trigger it by hand from the Actions tab (works on any branch).
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   FTP_SERVER      e.g. ftp.quantzi.in   (host only, no ftp:// prefix)
+#   FTP_USERNAME    the cPanel/FTP account username
+#   FTP_PASSWORD    that account's password
+#   FTP_SERVER_DIR  document root of the subdomain, WITH trailing slash,
+#                   e.g. /public_html/demo/  (check cPanel → Subdomains)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'deploy/demo.quantzi.in/**'
+      - '.github/workflows/deploy-demo.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-demo-quantzi
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Publish to GoDaddy over FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Explicit FTP over TLS. If your GoDaddy plan only offers plain FTP,
+          # change this to: ftp
+          protocol: ftps
+          local-dir: ./deploy/demo.quantzi.in/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Don't wipe unrelated files if the doc root is shared.
+          dangerous-clean-slate: false

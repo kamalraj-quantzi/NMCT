@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NMCT Homepage Concepts — Quantzi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1B5CA8;--navy-d:#123B63;--teal:#0E9C8E;--amber:#FFC20E;--ink:#1F2933;--bg:#F5F7FA;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Manrope',system-ui,sans-serif;color:var(--ink);
+       background:radial-gradient(1200px 600px at 50% -10%,#1c3f66 0%,var(--navy-d) 55%,#0d2b48 100%);
+       min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+  a{text-decoration:none;color:inherit}
+  header{padding:34px clamp(20px,5vw,64px) 0}
+  .brand{display:inline-flex;align-items:center;background:#fff;border-radius:12px;padding:8px 16px;
+          box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .brand img{height:40px;display:block}
+  main{flex:1;max-width:1180px;width:100%;margin:0 auto;padding:clamp(40px,7vh,80px) clamp(20px,5vw,64px) 64px}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#7fd9cf;margin:0 0 16px}
+  h1{font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.06;letter-spacing:-.02em;color:#fff;margin:0;max-width:18ch;text-wrap:balance}
+  .lede{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:rgba(255,255,255,.82);margin:20px 0 0;max-width:60ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(20px,3vw,32px);margin-top:clamp(40px,6vh,64px)}
+  .card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.28);
+        display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.6,.2,1),box-shadow .3s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 34px 74px rgba(0,0,0,.4)}
+  .card .top{padding:30px 30px 0;position:relative}
+  .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+       padding:6px 13px;border-radius:999px;background:rgba(14,156,142,.12);color:#0b7a70}
+  .card h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:18px 0 8px}
+  .card p{font-size:15px;line-height:1.6;color:#52606D;margin:0}
+  .feat{list-style:none;padding:22px 30px 0;margin:0;display:flex;flex-direction:column;gap:9px}
+  .feat li{font-size:14px;color:#3a4652;display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+  .feat li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-top:7px}
+  .card .cta{margin:auto 30px 30px;margin-top:26px;display:flex;align-items:center;justify-content:center;gap:8px;
+             background:var(--navy);color:#fff;font-weight:800;font-size:15.5px;padding:15px 0;border-radius:12px;
+             transition:background .25s}
+  .card:hover .cta{background:#164C8C}
+  .card.b .cta{background:var(--amber);color:var(--ink)}
+  .card.b:hover .cta{background:#E8AF00}
+  .bar{height:6px;width:100%}
+  .card.a .bar{background:linear-gradient(90deg,var(--teal),#7fd9cf)}
+  .card.b .bar{background:linear-gradient(90deg,var(--navy),var(--amber))}
+  footer{padding:22px clamp(20px,5vw,64px) 34px;color:rgba(255,255,255,.6);font-size:13px;
+          display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
+  .note{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:28px;max-width:64ch;line-height:1.6}
+</style>
+</head>
+<body>
+  <header>
+    <span class="brand"><img src="https://www.nmctngo.org/image/logo/logo.png" alt="NMCT — Native Medicare Charitable Trust"></span>
+  </header>
+  <main>
+    <p class="eyebrow">Native Medicare Charitable Trust · Homepage Concepts</p>
+    <h1>Two homepage directions to review.</h1>
+    <p class="lede">Prepared by Quantzi for NMCT. Open each concept below to explore a fully interactive,
+      working prototype of the new homepage. Pick the direction that feels right — we'll build the full site from it.</p>
+
+    <div class="grid">
+      <a class="card a" href="./demo-1/">
+        <div class="bar"></div>
+        <div class="top">
+          <span class="tag">Concept A · Cinematic</span>
+          <h2>Story-led &amp; immersive</h2>
+          <p>A motion-rich, editorial homepage designed to move people — built around NMCT's impact stories.</p>
+        </div>
+        <ul class="feat">
+          <li>Full-screen cinematic hero with subtle motion</li>
+          <li>Horizontal scroll through the six programme stories</li>
+          <li>Animated impact counters &amp; a 1988→today timeline</li>
+        </ul>
+        <span class="cta">View Concept A →</span>
+      </a>
+
+      <a class="card b" href="./demo-2/">
+        <div class="bar"></div>
+        <div class="top">
+          <span class="tag">Concept B · Structured</span>
+          <h2>Clear &amp; action-driven</h2>
+          <p>A clean, conventional homepage built to guide visitors and make giving effortless.</p>
+        </div>
+        <ul class="feat">
+          <li>Dropdown navigation &amp; auto-rotating hero slider</li>
+          <li>Live donation widget — amounts &amp; give-once / monthly</li>
+          <li>Programmes, projects, news &amp; full footer</li>
+        </ul>
+        <span class="cta">View Concept B →</span>
+      </a>
+    </div>
+
+    <p class="note">Note: figures, registration numbers, partner logos and photography shown in the concepts are
+      placeholders and will be replaced with NMCT's verified content before launch.</p>
+  </main>
+  <footer>
+    <span>© 2026 Native Medicare Charitable Trust · Concepts by Quantzi</span>
+    <span>info@nmctngo.org · +91 422 240 1747</span>
+  </footer>
+</body>
+</html>
